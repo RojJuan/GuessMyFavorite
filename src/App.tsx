@@ -1,5 +1,6 @@
 import './App.css'
 import { useState } from 'react'
+import Confetti from "react-confetti"
 
 function App() {
   const [guess, setGuess] = useState('');
@@ -23,12 +24,14 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="text-2xl">GUESS MY FAVORITE SUPERMARKET</h1>
+        <h1 className="text-2xl">GUESS MY FAVORITE</h1>
+        <h1 className="text-2xl text-red-500">SUPERMARKET</h1>
       </div>
       {message && (
         <div className="mt-4 text-center text-lg font-medium">
           {isCorrect ? (
             <>
+            <Confetti />
               Correct! it IS{' '}
               <span className="text-green-500">{correctAnswer}</span>! WOOHOO!
             </>
@@ -53,10 +56,7 @@ function App() {
             className="mt-2 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </label>
-        <button 
-          type="submit" 
-          className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-        >
+        <button className="bg-blue-500 text-black px-4 py-2 rounded-md font-semibold hover:bg-blue-600 transition-colors">
           Submit
         </button>
       </form>
