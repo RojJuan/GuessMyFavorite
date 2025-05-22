@@ -1,17 +1,19 @@
 import './App.css'
 import { useState } from 'react'
 import Confetti from "react-confetti"
+import { getTodayPrompt } from './utils/GetToday'
 
 function App() {
+  const { category, answer: correctAnswer } = getTodayPrompt();
+
   const [guess, setGuess] = useState('');
-  const [submittedGuess, setSubmittedGuess] = useState(''); // New state to store the last submitted guess
+  const [submittedGuess, setSubmittedGuess] = useState('');
   const [message, setMessage] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
-  const correctAnswer = 'Costco';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmittedGuess(guess); // Store the current guess as the submitted guess
+    setSubmittedGuess(guess);
     if (guess.toLowerCase() === correctAnswer.toLowerCase()) {
       setMessage(`Correct! it IS ${correctAnswer}! WOOHOO!`);
       setIsCorrect(true);
@@ -24,14 +26,14 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="text-2xl">GUESS MY FAVORITE</h1>
-        <h1 className="text-2xl text-red-500">SUPERMARKET</h1>
+        <h1 className="text-2xl font-bold">GUESS MY FAVORITE</h1>
+        <h1 className="text-2xl text-red-500 uppercase">{category}</h1>
       </div>
       {message && (
         <div className="mt-4 text-center text-lg font-medium">
           {isCorrect ? (
             <>
-            <Confetti />
+              <Confetti />
               Correct! it IS{' '}
               <span className="text-green-500">{correctAnswer}</span>! WOOHOO!
             </>
@@ -43,13 +45,13 @@ function App() {
           )}
         </div>
       )}
-      <form 
-        onSubmit={handleSubmit} 
+      <form
+        onSubmit={handleSubmit}
         className="mt-4 p-6 border-2 border-gray-300 rounded-lg shadow-lg bg-white max-w-sm mx-auto"
       >
         <label className="block mb-2 text-lg font-medium text-gray-700">
           Enter your guess:
-          <input 
+          <input
             type="text"
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
@@ -61,7 +63,7 @@ function App() {
         </button>
       </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
